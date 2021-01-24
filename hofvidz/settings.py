@@ -120,3 +120,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# common static file locations
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+# folder to store static files when running collectstatic commad
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# authentication functionalities
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
