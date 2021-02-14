@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}
-    CreateHall
+    Edit Hall
 {% endblock title %}
 
 {% block content %}
 <div class="container">
-    <h2>Create  Hall of Fame</h2>
+    <h2>Edit Hall of Fame</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Create</button>
+        <button class="btn btn-primary" type="submit">Save</button>
     </form>
+    <a href="{% url 'halls:delete_hall' hall.id %}" class="btn btn-danger">Delete</a>
 </div>
 {% endblock content %}
