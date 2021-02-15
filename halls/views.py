@@ -6,7 +6,8 @@ from django.views.generic import DetailView, ListView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 
-from halls.models import Hall
+from halls.models import Hall, Video
+from halls.forms import VideoForm, SearchForm
 
 
 def home(request):
@@ -17,6 +18,26 @@ def home(request):
 def dashboard(request):
     """Display a dashboard for the user."""
     return render(request, "halls/dashboard.html")
+
+
+def add_video(request, pk):
+    """Add video for hall of fame."""
+    form = VideoForm()
+    search_form = SearchForm()
+
+    if request.method == "POST":
+        form = VideoForm(request.POST)
+        if form.is_valid():
+            video = Video()
+            video.url = form.cleaned_data['url']
+            video.title = form.cleaned_data['title']
+            video.youtube_id = form.cleaned_data['youtube_id']
+            video.hall = Hall.objects.get(pk=pk)
+            video.save()
+            return redirect('home')
+
+    context = {'form': form, 'search_form': search_form}
+    return render(request, 'halls/add_video.html', context=context)
 
 
 class SignUp(CreateView):

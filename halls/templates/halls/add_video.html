@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+Add Video
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h2>Add Video</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        <p>
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+        </p>
+
+        {% endfor %}
+        <button class="btn btn-primary" type="submit">Create</button>
+    </form>
+    <h2>OR</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ search_form }}
+    </form>
+</div>
+{% endblock content %}
